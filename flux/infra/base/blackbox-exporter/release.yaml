@@ -40,6 +40,14 @@ spec:
             query_name: "example.com"
             query_type: "A"
             valid_rcodes: ["NOERROR"]
+    replicaCount: 1
+    resources:
+      requests:
+        cpu: 10m
+        memory: 32Mi
+      limits:
+        cpu: 50m
+        memory: 64Mi
     serviceMonitor:
       enabled: true
       defaults:
