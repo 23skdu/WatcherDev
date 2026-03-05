@@ -1,0 +1,46 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: loki
+  namespace: monitoring
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: loki
+      version: ">= 5.0.0"
+      sourceRef:
+        kind: HelmRepository
+        name: grafana
+      interval: 10m
+  install:
+    createNamespace: true
+    crds: CreateReplace
+  upgrade:
+    crds: CreateReplace
+  values:
+    loki:
+      auth_enabled: false
+      commonConfig:
+        replication_factor: 1
+      storage:
+        type: filesystem
+    singleBinary:
+      replicas: 1
+    test:
+      enabled: false
+    monitoring:
+      dashboards:
+        enabled: false
+      rules:
+        enabled: false
+      alerts:
+        enabled: false
+      serviceMonitor:
+        enabled: false
+      selfMonitoring:
+        enabled: false
+        grafanaAgent:
+          installOperator: false
+    gateway:
+      enabled: false

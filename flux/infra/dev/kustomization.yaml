@@ -4,3 +4,4 @@ resources:
   - ../base/prometheus
   - ../base/grafana-alloy
   - ../base/haproxy-ingress
+  - ../base/loki
