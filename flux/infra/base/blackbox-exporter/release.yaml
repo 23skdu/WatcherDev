@@ -1,0 +1,62 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: prometheus-blackbox-exporter
+  namespace: monitoring
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: prometheus-blackbox-exporter
+      version: ">= 8.0.0"
+      sourceRef:
+        kind: HelmRepository
+        name: prometheus-community
+      interval: 10m
+  install:
+    createNamespace: true
+    crds: CreateReplace
+  upgrade:
+    crds: CreateReplace
+  values:
+    config:
+      modules:
+        http_2xx:
+          prober: http
+          timeout: 5s
+          http:
+            valid_http_versions: ["HTTP/1.1", "HTTP/2.0"]
+            follow_redirects: true
+            preferred_ip_protocol: "ip4"
+        icmp:
+          prober: icmp
+          timeout: 5s
+          icmp:
+            preferred_ip_protocol: "ip4"
+        dns_udp:
+          prober: dns
+          timeout: 5s
+          dns:
+            query_name: "example.com"
+            query_type: "A"
+            valid_rcodes: ["NOERROR"]
+    serviceMonitor:
+      enabled: true
+      defaults:
+        labels:
+          release: kube-prometheus-stack
+        interval: 30s
+        scrapeTimeout: 10s
+      targets:
+        - name: google-icmp
+          url: google.com
+          module: icmp
+        - name: google-dns
+          url: 8.8.8.8
+          module: dns_udp
+        - name: yahoo-icmp
+          url: yahoo.com
+          module: icmp
+        - name: yahoo-dns
+          url: 8.8.4.4
+          module: dns_udp

@@ -5,3 +5,4 @@ resources:
   - ../base/grafana-alloy
   - ../base/haproxy-ingress
   - ../base/loki
+  - ../base/blackbox-exporter
