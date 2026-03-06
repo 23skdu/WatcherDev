@@ -1,0 +1,6 @@
+creation_rules:
+  - path_regex: flux/infra/.*\.yaml
+    encrypted_regex: "^(data|stringData)$"
+    key_groups:
+      - age:
+          - age15k2kss4sg0s0d72phtkae4ma92vtv8wavmrjf3zy580m77mdz9wsv2cky7
