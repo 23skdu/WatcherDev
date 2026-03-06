@@ -34,10 +34,10 @@ To achieve a true continuous deployment experience locally, Flux should automati
 Currently, all cross-namespace communication is permitted by default.
 **Action:** Implement `NetworkPolicy` strict default-deny policies in all namespaces, whitelisting only essential service-to-service communication.
 
-### 5. Configure Default Dashboards and Alerts
+### 5. Configure Prometheus Alerts
 
-Prometheus and Alloy are running, but without comprehensive, out-of-the-box alerts.
-**Action:** Add a `ConfigMap` containing default Dashboards and configure `PrometheusRule` Custom Resources for basic cluster health alerts.
+Prometheus and Alloy are running, and infrastructure dashboards are provisioned, but there are no comprehensive out-of-the-box alerts.
+**Action:** Configure `PrometheusRule` Custom Resources and Alertmanager routes for basic cluster health alerts.
 
 ### 6. Implement OpenTofu Remote State Management
 
@@ -52,11 +52,6 @@ The OpenTofu state for bootstrapping likely resides locally.
 
 **Action:** Integrate a container security scanner (such as Trivy) into the CI pipeline to block images with critical CVEs from being deployed by FluxCD.
 
-### 9. Harden HAProxy TLS and Gateway Configurations
-
-The Gateway API lacks automated TLS certificate management.
-**Action:** Enforce strong TLS ciphers, integrate `cert-manager` to automatically provision and rotate TLS certificates for all HTTPRoutes.
-
-### 10. Audit and Restrict RBAC Permissions
+### 9. Audit and Restrict RBAC Permissions
 
 **Action:** Review all `ClusterRoleBindings` and `RoleBindings`. Limit cluster-admin access strictly to CI/CD controllers and apply the Principle of Least Privilege across service accounts.
