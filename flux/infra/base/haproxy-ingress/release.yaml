@@ -20,6 +20,11 @@ spec:
     crds: CreateReplace
   values:
     controller:
+      config:
+        ssl-options: "no-sslv3 no-tls-tickets no-tlsv10 no-tlsv11"
+        ssl-ciphers: "ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384"
+        ssl-cipher-suites: "TLS_AES_128_GCM_SHA256:TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256"
+
       replicaCount: 1
       resources:
         requests:

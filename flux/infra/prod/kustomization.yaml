@@ -8,4 +8,5 @@ resources:
   - ../base/loki
   - ../base/blackbox-exporter
   - ../base/gateway-api
+  - ../base/cert-manager
   - ../base/test-secret.yaml
