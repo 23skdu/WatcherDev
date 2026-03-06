@@ -30,3 +30,5 @@ spec:
           memory: 200Mi
       kubernetesGateway:
         enabled: true
+      extraArgs:
+        watch-gateway: ""
