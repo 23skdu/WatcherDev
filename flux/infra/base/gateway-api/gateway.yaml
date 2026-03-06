@@ -3,7 +3,7 @@ kind: GatewayClass
 metadata:
   name: haproxy
 spec:
-  controllerName: haproxy-ingress.github.io/gateway-controller
+  controllerName: haproxy-ingress.github.io/gateway
 ---
 apiVersion: gateway.networking.k8s.io/v1
 kind: Gateway
