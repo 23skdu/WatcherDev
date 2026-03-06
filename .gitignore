@@ -205,3 +205,18 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# Security & Secrets
+*.agekey
+*.pem
+*.key
+*.crt
+*.cert
+*_rsa
+*_dsa
+*_ed25519
+*_ecdsa
+credentials.json
+client_secret.json
+kubeconfig*
+.kube/config
