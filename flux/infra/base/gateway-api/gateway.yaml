@@ -1,0 +1,21 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: GatewayClass
+metadata:
+  name: haproxy
+spec:
+  controllerName: haproxy-ingress.github.io/gateway-controller
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: monitoring-gateway
+  namespace: monitoring
+spec:
+  gatewayClassName: haproxy
+  listeners:
+    - name: http
+      port: 80
+      protocol: HTTP
+      allowedRoutes:
+        namespaces:
+          from: Same
