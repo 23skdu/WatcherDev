@@ -20,6 +20,7 @@ spec:
         namespaces:
           from: Same
     - name: https
+      hostname: "*.watcher.local"
       port: 443
       protocol: HTTPS
       tls:
