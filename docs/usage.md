@@ -90,6 +90,20 @@ Grafana is automatically configured with the following datasources:
 - **Loki**: Configured to point to the internal Loki service.
 - **Alloy**: Enabled for log/metric ingestion.
 
+## Secret Management with SOPS & Age
+
+The `infra` stack is configured to automatically decrypt secrets managed by Mozilla SOPS using an Age key pair. To add a new secret or modify an existing one:
+
+1. Ensure the `age.agekey` private key is present in `~/.config/sops/age/keys.txt`.
+2. Create your unencrypted Kubernetes Secret YAML (e.g., `my-secret.yaml`).
+3. Encrypt the secret in place using SOPS (it uses the `.sops.yaml` configuration to find the public key and only target data fields):
+
+   ```bash
+   sops --encrypt --in-place my-secret.yaml
+   ```
+
+4. Commit the encrypted file to the repository. Flux will decrypt it using the `sops-age` secret residing in the `flux-system` namespace.
+
 ## Verification
 
 To verify the setup, you can check the status of FluxCD and the deployed pods:
