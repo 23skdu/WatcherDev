@@ -55,3 +55,33 @@ spec:
           uid: loki
           url: http://loki.monitoring.svc.cluster.local:3100
           access: proxy
+      dashboardProviders:
+        dashboardproviders.yaml:
+          apiVersion: 1
+          providers:
+            - name: "default"
+              orgId: 1
+              folder: ""
+              type: file
+              disableDeletion: false
+              editable: true
+              options:
+                path: /var/lib/grafana/dashboards/default
+      dashboards:
+        default:
+          cert-manager:
+            gnetId: 11001
+            revision: 1
+            datasource: Prometheus
+          blackbox-exporter:
+            gnetId: 13659
+            revision: 2
+            datasource: Prometheus
+          haproxy-ingress:
+            gnetId: 12056
+            revision: 1
+            datasource: Prometheus
+          loki:
+            gnetId: 13639
+            revision: 2
+            datasource: Loki
