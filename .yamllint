@@ -1,7 +1,18 @@
 extends: default
+
 rules:
   line-length:
-    max: 150
+    max: 180
     level: warning
-  document-start:
-    present: true
+  indentation:
+    spaces: 2
+    indent-sequences: true
+    check-multi-line-strings: false
+  document-start: disable
+  truthy: disable
+
+ignore: |
+  .DS_Store
+  .git/
+  **/.terraform/
+  **/.sops.yaml
