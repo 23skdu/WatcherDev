@@ -34,24 +34,19 @@ To achieve a true continuous deployment experience locally, Flux should automati
 Currently, all cross-namespace communication is permitted by default.
 **Action:** Implement `NetworkPolicy` strict default-deny policies in all namespaces, whitelisting only essential service-to-service communication.
 
-### 5. Configure Prometheus Alerts
-
-Prometheus and Alloy are running, and infrastructure dashboards are provisioned, but there are no comprehensive out-of-the-box alerts.
-**Action:** Configure `PrometheusRule` Custom Resources and Alertmanager routes for basic cluster health alerts.
-
-### 6. Implement OpenTofu Remote State Management
+### 5. Implement OpenTofu Remote State Management
 
 The OpenTofu state for bootstrapping likely resides locally.
 **Action:** Migrate the local `terraform.tfstate` to a remote, encrypted backend (e.g., GCS or S3) with state locking to prevent accidental corruption.
 
-### 7. Enforce Pod Security Standards (PSS)
+### 6. Enforce Pod Security Standards (PSS)
 
 **Action:** Enable Kubernetes Pod Security Admission controller to enforce the `Restricted` or `Baseline` profile. This prevents pods from running as root or mounting sensitive host paths.
 
-### 8. Integrate Image Vulnerability Scanning
+### 7. Integrate Image Vulnerability Scanning
 
 **Action:** Integrate a container security scanner (such as Trivy) into the CI pipeline to block images with critical CVEs from being deployed by FluxCD.
 
-### 9. Audit and Restrict RBAC Permissions
+### 8. Audit and Restrict RBAC Permissions
 
 **Action:** Review all `ClusterRoleBindings` and `RoleBindings`. Limit cluster-admin access strictly to CI/CD controllers and apply the Principle of Least Privilege across service accounts.
